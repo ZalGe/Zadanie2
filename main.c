@@ -42,9 +42,8 @@ int main() {
     if (m + n != 16)
         printf("Invalid input! Please enter valid coefficients.\n");
 
-    else
-    {
-        srand(time(NULL));              //Selecting seed for generating random numbers depending on time
+    else {
+        srand(time(NULL));                  //Selecting seed for generating random numbers depending on time
 
         for (int i = 0; i < p; i++) {
             f = Random(m, n);
@@ -70,8 +69,7 @@ int main() {
  */
 
 /* Generator of random floating point number */
-double Random(int a, int b)
-{
+double Random(int a, int b) {
     double x = (pow(2, a) - pow(2, (-b)));      //Calculating to what maximum range i can generate random number
     double r = ((double) rand() / (double) (RAND_MAX + 1) * x);     //Generating random number in range < 0 ; x >
 
@@ -79,8 +77,7 @@ double Random(int a, int b)
 }
 
 /* Convertor from floating point number to Q number format */
-int float2Q(double a, int b)
-{
+int float2Q(double a, int b) {
     int c;
     double n = a * pow(2,b);       //Calculating converted number
 
@@ -94,8 +91,7 @@ int float2Q(double a, int b)
 }
 
 /* Convertor from Q number format to floating point number */
-double Q2float(int a, int b)
-{
+double Q2float(int a, int b) {
     double c = a / pow(2, b);      //Calculating converted number
 
     return c;
