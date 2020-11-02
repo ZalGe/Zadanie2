@@ -3,13 +3,15 @@
  * @author Filip Tomek
  * @date 27.10.2020
  * @name Zadanie 2C
- * @version 1.0
+ * @version 1.2
+ * @standard ANSI C99
  * @brief Program is designed to generate random floating point number, then convert it to Q number format and then
  *        convert it again to floating point number. Its function is to calculate average difference between generated
  *        floating point number and converted floating point number.
  *
  *        Program will print error message, when:
  *        - sum of coefficients m and n != 16
+ *        - average is greater than MaxAverage
  *
  */
 
@@ -17,7 +19,6 @@
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
-
 
 /**
  * Prototype of functions
@@ -34,7 +35,7 @@ double Q2float(int a, int b);
 int main() {
 
     int m, n, Q, p = 1000;
-    double f, f1, difference, sum = 0, average;
+    double f, f1, difference, sum = 0, average, MaxAverage;
 
     printf("Enter coefficients m and n: \n");
 
@@ -59,8 +60,15 @@ int main() {
 
                 sum = sum + difference;
             }
+
+            MaxAverage = pow(2,(-n));
             average = sum / p;
-            printf("Average difference between generated float. numbers and calculated float. numbers is %f\n", average);
+
+            if (average <= MaxAverage)
+                printf("Average difference between generated float. numbers and calculated float. numbers is %f\n", average);
+
+            else
+                printf("Unexpected error has occurred. Please, restart the program.\n");
         }
     }
     while (m + n != 16);     // If the condition is true, then it will print error message and you have to provide a new input
