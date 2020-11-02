@@ -20,7 +20,7 @@
 
 
 /**
- * Declaration of functions
+ * Prototype of functions
  */
 
 double Random(int a, int b);
@@ -37,29 +37,33 @@ int main() {
     double f, f1, difference, sum = 0, average;
 
     printf("Enter coefficients m and n: \n");
-    scanf("%d %d", &m, &n);
 
-    if (m + n != 16)
-        printf("Invalid input! Please enter valid coefficients.\n");
+    do {
+        scanf("%d %d", &m, &n);
 
-    else {
-        srand(time(NULL));                  //Selecting seed for generating random numbers depending on time
+        if (m + n != 16)
+            printf("Invalid input! Sum of entered coefficients must be 16! Please enter valid coefficients.\n");
 
-        for (int i = 0; i < p; i++) {
-            f = Random(m, n);
-            Q = float2Q(f, n);
-            f1 = Q2float(Q, n);
+        else {
+            srand(time(NULL));
 
-            if (f - f1 < 0)
-                difference = -(f - f1);
-            else
-                difference = f - f1;
+            for (int i = 0; i < p; i++) {
+                f = Random(m, n);
+                Q = float2Q(f, n);
+                f1 = Q2float(Q, n);
 
-            sum = sum + difference;
+                if (f - f1 < 0)
+                    difference = -(f - f1);
+                else
+                    difference = f - f1;
+
+                sum = sum + difference;
+            }
+            average = sum / p;
+            printf("Average difference between generated float. numbers and calculated float. numbers is %f\n", average);
         }
-        average = sum/p;
-        printf("%f\n",average);
     }
+    while (m + n != 16);
 
     return 0;
 }
@@ -79,7 +83,7 @@ double Random(int a, int b) {
 /* Convertor from floating point number to Q number format */
 int float2Q(double a, int b) {
     int c;
-    double n = a * pow(2,b);       //Calculating converted number
+    double n = a * pow(2,b);
 
     if ((n + 0.5) >= ceil(n))         //If the number n is equal or greater than XXX.5 (X represents other digits),
         c = ceil(n);                  //then it will round up
@@ -92,7 +96,7 @@ int float2Q(double a, int b) {
 
 /* Convertor from Q number format to floating point number */
 double Q2float(int a, int b) {
-    double c = a / pow(2, b);      //Calculating converted number
+    double c = a / pow(2, b);
 
     return c;
 }
