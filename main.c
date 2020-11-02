@@ -63,7 +63,7 @@ int main() {
             printf("Average difference between generated float. numbers and calculated float. numbers is %f\n", average);
         }
     }
-    while (m + n != 16);
+    while (m + n != 16);     // If the condition is true, then it will print error message and you have to provide a new input
 
     return 0;
 }
